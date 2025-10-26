@@ -1,0 +1,36 @@
+.create-habit-type-form {
+  /* Usa o mesmo estilo de card dos outros */
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-medium);
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto; /* Centraliza o formulário */
+  height: fit-content;
+}
+
+.create-habit-type-form h3 {
+  text-align: center;
+  color: var(--primary-green);
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.create-habit-type-form p {
+  text-align: center;
+  font-size: 0.95em;
+  margin-bottom: 25px;
+  color: var(--text-light);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}

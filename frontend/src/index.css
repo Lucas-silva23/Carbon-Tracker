@@ -1,0 +1,163 @@
+/* Nova Paleta Profissional (Azul/Verde) */
+:root {
+  --primary-green: #00796B; /* Verde escuro (Tel) */
+  --primary-green-dark: #004D40; /* Verde bem escuro */
+  --primary-blue: #0277BD; /* Azul escuro */
+  --primary-blue-dark: #01579B; /* Azul bem escuro */
+  
+  --text-color: #263238;  /* Quase preto, levemente azulado */
+  --text-light: #546E7A; /* Cinza-azulado */
+  
+  --bg-color: #F0F4F8;     /* Fundo de página (cinza-azulado muito claro) */
+  --card-bg: #FFFFFF;
+  --border-color: #CFD8DC; /* Borda (cinza-azulado) */
+
+  --danger-color: #D32F2F; /* Vermelho para 'Sair' */
+  --danger-dark: #B71C1C;
+
+  /* Sombras mais sutis e profissionais */
+  --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset Básico (Mantido) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 0; /* O padding será controlado pelo dashboard-container */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-green-dark);
+  margin-bottom: 0.8em;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1em;
+  color: var(--text-light);
+}
+
+/* Botões (Usando a cor azul como primária) */
+button {
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 12px 24px; /* Botões um pouco maiores */
+  border-radius: 8px; /* Bordas levemente mais arredondadas */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600; /* Texto do botão mais forte */
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+button:hover {
+  background-color: var(--primary-blue-dark);
+  transform: translateY(-2px); /* Efeito "lift" */
+  box-shadow: var(--shadow-medium);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background-color: #B0BEC5; /* Cinza */
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Formulários */
+form {
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px; /* Bordas mais suaves */
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Espaçamento ligeiramente maior */
+  width: 100%;
+}
+
+form h2, form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 14px; /* Mais padding interno */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(2, 119, 189, 0.2); /* Sombra de foco azul */
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+  color: var(--text-color);
+}
+
+/* Links de Autenticação (Login/Register) */
+.auth-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+.auth-link a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+  color: var(--primary-blue-dark);
+}
+
+/* Classes de utilidade */
+.error-message {
+  color: #c62828;
+  background-color: #ffcdd2;
+  border: 1px solid #e57373;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+}

@@ -1,0 +1,114 @@
+.habit-log-container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 20px; /* Alinha com o .dashboard-content */
+  margin-top: 20px;
+}
+
+.habit-log-container h2 {
+  color: var(--primary-green-dark);
+  font-size: 2em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.empty-log {
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--text-light);
+  padding: 40px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+}
+
+.habit-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.habit-log-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Para telas pequenas */
+  gap: 15px;
+  
+  background-color: var(--card-bg);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-light);
+  border-left: 5px solid var(--primary-green);
+  transition: all 0.3s ease;
+}
+
+.habit-log-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.habit-log-details {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.habit-log-date {
+  font-weight: 600;
+  color: var(--primary-blue);
+  font-size: 0.95em;
+  min-width: 90px;
+}
+
+.habit-log-name {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: var(--text-color);
+}
+
+.habit-log-quantity {
+  font-size: 1em;
+  color: var(--text-light);
+}
+
+.habit-log-impact {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.habit-log-carbon {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: var(--primary-green-dark);
+  background-color: #E0F2F1; /* Verde claro */
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.habit-log-delete-btn {
+  background-color: transparent;
+  color: var(--text-light);
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  min-width: unset;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.habit-log-delete-btn:hover {
+  background-color: #FBE9E7; /* Vermelho claro */
+  color: var(--danger-color);
+  transform: none;
+  box-shadow: none;
+}

@@ -1,0 +1,44 @@
+.carbon-chart-container {
+  background-color: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-medium);
+  width: 100%;
+  
+  /* FIX DO LAYOUT:
+    flex-basis: 450px; (largura base)
+  */
+  flex: 1 1 450px;
+  max-width: 600px; /* Limite de largura */
+  min-height: 480px; /* Altura mínima para o gráfico caber bem */
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinha o h3 no topo */
+}
+
+.carbon-chart-container h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--primary-green); /* Título do gráfico em verde */
+  font-size: 1.8em;
+  font-weight: 700;
+}
+
+/* Container para o gráfico Doughnut ter responsividade
+  dentro do card
+*/
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* Limita o tamanho do gráfico */
+  margin: 0 auto;
+}
+
+.carbon-chart-container p {
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.1em;
+}
