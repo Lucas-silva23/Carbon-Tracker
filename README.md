@@ -24,10 +24,61 @@ O Carbon Tracker é uma aplicação web desenvolvida para ajudar usuários a mon
 
 - Hashing de Senhas: bcryptjs
 
+## Capturas de Tela
+
 ![Descrição da imagem](/images/home.png)
 ![Descrição da imagem](/images/carbon-tracker.png)
 
 ## Como Rodar o Projeto
 
+### Backend
 
+1. Navegue até a pasta do backend:
+
+```
+cd backend
+```
+
+2. Instale as dependências:
+
+```
+npm install
+```
+
+3. Crie um arquivo .env com as variáveis necessárias:
+
+```
+JWT_SECRET=chave-jwt
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=seu-usuario
+DB_PASSWORD=sua-senha
+DB_NAME=carbon_tracker
+```
+
+4. Inicie o servidor:
+
+```
+npm run dev
+```
+
+### Frontend
+
+1. Navegue até a pasta do frontend:
+
+```
+cd frontend
+```
+
+2. Instale as dependências:
+
+```
+npm install
+```
+
+3. Inicie o servidor:
+
+```
+npm start
+```
 
