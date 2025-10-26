@@ -1,0 +1,55 @@
+/* Este container é o mesmo que você tinha no index.css,
+   mas agora é específico desta página */
+.auth-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 60px 30px;
+}
+
+.auth-page-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; /* Alinha os topos dos forms */
+  gap: 40px;
+  width: 100%;
+  max-width: 1000px; /* Largura máxima para os dois forms */
+}
+
+.auth-form-wrapper {
+  flex: 1; /* Cada form ocupa 50% do espaço */
+  min-width: 300px;
+  max-width: 450px;
+}
+
+/* O estilo .auth-form já existe no index.css e será aplicado */
+.auth-form {
+  width: 100%;
+}
+
+.auth-divider {
+  width: 2px;
+  background-color: var(--border-color);
+  align-self: stretch; /* Estica a linha vertical */
+  margin: 20px 0;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 800px) {
+  .auth-page-content {
+    flex-direction: column; /* Empilha os forms */
+    align-items: center;
+    gap: 50px;
+  }
+  
+  .auth-divider {
+    display: none; /* Esconde a linha vertical */
+  }
+
+  .auth-form-wrapper {
+    width: 100%;
+    max-width: 450px;
+  }
+}

@@ -1,0 +1,79 @@
+.navbar {
+  background-color: var(--card-bg);
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  position: sticky; /* Fica no topo */
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 30px;
+}
+
+.navbar-logo {
+  color: var(--primary-green);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-button {
+  padding: 8px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Botão Primário (Registrar) */
+.btn-primary {
+  background-color: var(--primary-blue);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--primary-blue-dark);
+  transform: translateY(-1px);
+}
+
+/* Botão Secundário (Login) */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
+}
+.btn-secondary:hover {
+  background-color: #E3F2FD; /* Fundo azul bem claro */
+  transform: translateY(-1px);
+}
+
+/* Botão de Logout */
+.btn-logout {
+  background-color: var(--danger-color);
+  color: white;
+}
+.btn-logout:hover {
+  background-color: var(--danger-dark);
+}

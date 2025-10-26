@@ -38,10 +38,10 @@ body {
 
 #root {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column; /* <-- ADICIONE ESTA LINHA */
+  align-items: center;    /* <-- MUDE DE 'flex-start' para 'center' */
   min-height: 100vh;
-  padding: 0; /* O padding será controlado pelo dashboard-container */
+  padding: 0; 
 }
 
 h1, h2, h3, h4, h5, h6 {

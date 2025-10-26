@@ -8,38 +8,6 @@
   padding-bottom: 40px; /* Adiciona espaço no final */
 }
 
-.dashboard-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--card-bg);
-  padding: 20px 40px; /* Mais padding horizontal */
-  /* Sombra sutil apenas na parte de baixo */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
-  border-bottom: 1px solid var(--border-color);
-}
-
-.dashboard-header h1 {
-  margin: 0;
-  color: var(--primary-green);
-  font-size: 2em;
-  font-weight: 700; /* Mais peso no título */
-}
-
-.logout-button {
-  background-color: var(--danger-color);
-  min-width: unset;
-  padding: 10px 20px;
-  font-size: 15px;
-  box-shadow: var(--shadow-light);
-}
-
-.logout-button:hover {
-  background-color: var(--danger-dark);
-  box-shadow: var(--shadow-medium);
-}
-
 .total-carbon-saved {
   background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
   color: white;

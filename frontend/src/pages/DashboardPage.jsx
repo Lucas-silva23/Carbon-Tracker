@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+// Remova useNavigate, pois o logout está no Navbar
 import api from '../services/api';
 
-// Nossos componentes
+// Componentes
+import Navbar from '../components/Navbar'; // 1. IMPORTAR NAVBAR
 import AddHabitForm from '../components/AddHabitForm';
 import CarbonChart from '../components/CarbonChart';
 import CreateHabitTypeForm from '../components/CreateHabitTypeForm';
@@ -11,152 +12,121 @@ import HabitLog from '../components/HabitLog';
 import '../styles/DashboardPage.css';
 
 const DashboardPage = () => {
-  console.log('--- [DashboardPage] Componente Montado ---');
-
-  // Estados existentes
+  // ... (todos os seus estados existentes: dashboardData, habitTypes, etc.)
   const [dashboardData, setDashboardData] = useState({ grand_total: 0, chart_data: [] });
   const [habitTypes, setHabitTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  // Novos estados
   const [habitLog, setHabitLog] = useState([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  
+  // 2. REMOVA o `useNavigate` e o `handleLogout` daqui. 
+  // O Navbar agora cuida disso.
 
-  // Função de Logout (estável)
-  const handleLogout = useCallback(() => {
-    console.warn('--- [handleLogout] Sendo chamado! ---');
-    localStorage.removeItem('token');
-    navigate('/login');
-  }, [navigate]);
-
-  // Função para recarregar TUDO (estável)
+  // 3. Modifique o refreshAllData para não depender do handleLogout
   const refreshAllData = useCallback(async () => {
-    console.log('[refreshAllData]... Iniciando busca de dados...');
     setIsLoading(true);
     setError('');
-    
     try {
-      console.log('[refreshAllData]... 1. Buscando /dashboard');
-      const dashPromise = api.get('/habits/dashboard');
-      
-      console.log('[refreshAllData]... 2. Buscando /types');
-      const typesPromise = api.get('/habits/types');
-      
-      console.log('[refreshAllData]... 3. Buscando /log');
-      const logPromise = api.get('/habits/log');
-
-      // Espera todas as chamadas terminarem
-      console.log('[refreshAllData]... Aguardando todas as promises...');
       const [dashResponse, typesResponse, logResponse] = await Promise.all([
-        dashPromise,
-        typesPromise,
-        logPromise
+        api.get('/habits/dashboard'),
+        api.get('/habits/types'),
+        api.get('/habits/log')
       ]);
-
-      console.log('--- [refreshAllData] SUCESSO! Todas as chamadas retornaram. ---');
-      
       setDashboardData(dashResponse.data);
       setHabitTypes(typesResponse.data);
       setHabitLog(logResponse.data);
-
     } catch (err) {
-      // --- SE ALGO DER ERRADO, VAI CAIR AQUI ---
-      console.error('--- [refreshAllData] ERRO! A chamada falhou. ---');
-      console.error('Objeto de erro completo:', err);
-
-      if (err.response) {
-        // Erro veio do backend (404, 500, 401)
-        console.error('Erro de resposta do servidor:', err.response.data);
-        if (err.response.status === 401) {
-          console.error('ERRO 401! Token inválido ou expirado. Deslogando...');
-          handleLogout();
-        } else {
-          // Outro erro de servidor (ex: 500)
-          setError(err.response.data.msg || 'Erro interno do servidor.');
-        }
-      } else if (err.request) {
-        // Erro de rede (backend offline)
-        console.error('Erro de rede: O backend não respondeu.', err.request);
-        setError('Não foi possível conectar ao servidor. Tente novamente.');
-      } else {
-        // Outro erro de Javascript
-        console.error('Erro de Javascript no código:', err.message);
-        setError('Um erro inesperado ocorreu no frontend.');
+      console.error('Erro ao buscar dados:', err);
+      setError(err.response?.data?.msg || 'Não foi possível carregar os dados.');
+      if (err.response && err.response.status === 401) {
+        // Se der 401, o Navbar vai lidar com o logout na próxima ação
+        // ou podemos forçar o logout
+        localStorage.removeItem('token');
+        window.location.href = '/login'; // Força o redirecionamento
       }
     } finally {
-      // --- ESSE BLOCO *SEMPRE* DEVE RODAR ---
-      console.log('[refreshAllData]... Bloco FINALLY executado. Desligando o loading.');
       setIsLoading(false);
     }
-  }, [handleLogout]); // Dependência está correta
+  }, []); // Remova a dependência
 
-  // useEffect inicial
+  // ... (o resto dos seus useEffect, handleHabitTypeCreated, handleHabitLogChanged)
   useEffect(() => {
-    console.log('[useEffect]... Rodando pela primeira vez. Chamando refreshAllData.');
     refreshAllData();
-  }, [refreshAllData]); // Dependência está correta
+  }, [refreshAllData]);
 
-  // Renderização
+  const handleHabitTypeCreated = () => {
+    setShowCreateForm(false);
+    refreshAllData();
+  };
+  
+  const handleHabitLogChanged = () => {
+    refreshAllData();
+  };
+
+  // ... (ifs de isLoading e error)
   if (isLoading) {
-    console.log('[Render]... isLoading=true. Mostrando spinner.');
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <div className="loading-spinner"></div>
-      </div>
+      <>
+        <Navbar /> {/* Mostra o Navbar mesmo durante o loading */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 70px)' }}>
+          <div className="loading-spinner"></div>
+        </div>
+      </>
     );
   }
 
   if (error) {
-    console.log(`[Render]... isLoading=false, error=${error}. Mostrando erro.`);
-    return <div className="error-message" style={{ margin: '40px' }}>{error}</div>;
+    return (
+      <>
+        <Navbar />
+        <div className="error-message" style={{ margin: '40px' }}>{error}</div>
+      </>
+    );
   }
 
-  console.log('[Render]... isLoading=false, sem erro. Mostrando Dashboard.');
+  // 4. Modifique o JSX principal
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>Meu Painel de Carbono</h1>
-        <button className="logout-button" onClick={handleLogout}>Sair</button>
-      </header>
+    <> {/* Adiciona Fragmento */}
+      <Navbar /> {/* Adiciona a Navbar no topo */}
       
-      <div className="total-carbon-saved">
-        <p>Total de CO2 Reduzido:</p>
-        <span>{dashboardData.grand_total.toFixed(2)} kg</span>
-      </div>
-      
-      <div className="dashboard-content">
-        <AddHabitForm 
-          habitTypes={habitTypes} 
-          onHabitAdded={refreshAllData} // Simplificado
-        />
-        <CarbonChart chartData={dashboardData.chart_data} />
-      </div>
+      <div className="dashboard-container">
+        {/* 5. REMOVA O <header className="dashboard-header">...</header> */}
+        
+        <div className="total-carbon-saved">
+          <p>Total de CO2 Reduzido:</p>
+          <span>{dashboardData.grand_total.toFixed(2)} kg</span>
+        </div>
+        
+        <div className="dashboard-content">
+          <AddHabitForm 
+            habitTypes={habitTypes} 
+            onHabitAdded={handleHabitLogChanged} 
+          />
+          <CarbonChart chartData={dashboardData.chart_data} />
+        </div>
 
-      <div className="toggle-form-container">
-        <button 
-          className="toggle-create-form-btn" 
-          onClick={() => setShowCreateForm(!showCreateForm)}
-        >
-          {showCreateForm ? 'Cancelar' : 'Cadastrar Novo Tipo de Hábito'}
-        </button>
-      </div>
-      
-      {showCreateForm && (
-        <CreateHabitTypeForm 
-          onHabitTypeCreated={() => {
-            setShowCreateForm(false);
-            refreshAllData();
-          }}
-        />
-      )}
+        <div className="toggle-form-container">
+          <button 
+            className="toggle-create-form-btn" 
+            onClick={() => setShowCreateForm(!showCreateForm)}
+          >
+            {showCreateForm ? 'Cancelar' : 'Cadastrar Novo Tipo de Hábito'}
+          </button>
+        </div>
+        
+        {showCreateForm && (
+          <CreateHabitTypeForm 
+            onHabitTypeCreated={handleHabitTypeCreated} 
+          />
+        )}
 
-      <HabitLog 
-        log={habitLog} 
-        onHabitDeleted={refreshAllData} // Simplificado
-      />
-    </div>
+        <HabitLog 
+          log={habitLog} 
+          onHabitDeleted={handleHabitLogChanged} 
+        />
+      </div>
+    </>
   );
 };
 
