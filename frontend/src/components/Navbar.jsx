@@ -8,12 +8,7 @@ const Navbar = () => {
   const isLoggedIn = !!token; 
 
   const handleLogout = () => {
-    // 1. Remove o token de autenticação do armazenamento local
     localStorage.removeItem('token');
-    
-    // 2. Redireciona o usuário para a página inicial (HomePage)
-    // O Navbar irá re-renderizar automaticamente e mostrar 
-    // os botões "Login" e "Registrar".
     navigate('/');
   };
 
@@ -31,10 +26,10 @@ const Navbar = () => {
             </button>
           ) : (
             <>
-              <Link to="/auth" className="navbar-button btn-secondary"> {/* MUDANÇA AQUI */}
+              <Link to="/auth" className="navbar-button btn-secondary"> {}
                 Login
               </Link>
-              <Link to="/auth" className="navbar-button btn-primary"> {/* MUDANÇA AQUI */}
+              <Link to="/auth" className="navbar-button btn-primary"> {}
                 Registrar
               </Link>
             </>

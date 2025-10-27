@@ -1,8 +1,8 @@
 import React from 'react';
 import api from '../services/api';
-import '../styles/HabitLog.css'; // Novo CSS
+import '../styles/HabitLog.css';
 
-// Um pequeno ícone de lixeira (pode ser substituído por react-icons)
+// Um pequeno ícone de lixeira
 const TrashIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3 6 5 6 21 6"></polyline>
@@ -12,7 +12,7 @@ const TrashIcon = () => (
   </svg>
 );
 
-// Formata a data (ex: 2025-10-26 -> 26/10/2025)
+// Formata a data
 const formatDate = (dateString) => {
   const [year, month, day] = dateString.split('T')[0].split('-');
   return `${day}/${month}/${year}`;

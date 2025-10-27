@@ -1,7 +1,7 @@
 import React from 'react';
-import CarbonChart from './CarbonChart'; // Reutilizamos seu gráfico!
-import '../styles/HabitLog.css'; // Reutilizamos o estilo do log!
-import '../styles/DemoDashboard.css'; // CSS específico para o demo
+import CarbonChart from './CarbonChart'; 
+import '../styles/HabitLog.css'; 
+import '../styles/DemoDashboard.css';
 import { Link } from 'react-router-dom';
 
 // Dados "fake" para o gráfico
@@ -48,7 +48,7 @@ const DemoDashboard = () => {
         <CarbonChart chartData={fakeChartData} />
       </div>
 
-      {/* Log FAKE (reutilizando estilos do HabitLog) */}
+      {/* Log FAKE */}
       <div className="habit-log-container" style={{ marginTop: '40px' }}>
         <h2>Histórico de Demonstração</h2>
         <div className="habit-log-list">

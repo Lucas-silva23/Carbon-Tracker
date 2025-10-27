@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../services/api';
-import '../styles/AddHabitForm.css'; // Novo arquivo CSS para o formulário
+import '../styles/AddHabitForm.css';
 
 const AddHabitForm = ({ habitTypes, onHabitAdded }) => {
   const [selectedHabitId, setSelectedHabitId] = useState('');

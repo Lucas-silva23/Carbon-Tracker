@@ -12,31 +12,30 @@ const CarbonChart = ({ chartData }) => {
       {
         label: 'kg de CO2 Salvo',
         data: chartData.map(d => d.total_saved),
-        // NOVA PALETA (Tons de verde e azul)
         backgroundColor: [
-          '#00796B', // Verde Escuro
-          '#0277BD', // Azul Escuro
-          '#4DB6AC', // Verde Médio
-          '#4FC3F7', // Azul Médio
-          '#004D40', // Verde Mais Escuro
-          '#01579B', // Azul Mais Escuro
+          '#00796B', 
+          '#0277BD', 
+          '#4DB6AC', 
+          '#4FC3F7', 
+          '#004D40', 
+          '#01579B',
         ],
         borderColor: '#fff', 
         borderWidth: 2,
-        hoverOffset: 4, // Efeito leve ao passar o mouse
+        hoverOffset: 4,
       },
     ],
   };
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true, // Mantém a proporção
+    maintainAspectRatio: true, 
     plugins: {
       legend: {
-        position: 'bottom', // Legenda na parte de baixo
+        position: 'bottom', 
         labels: {
-          color: '#263238', // Cor do texto
-          padding: 20, // Espaçamento da legenda
+          color: '#263238', 
+          padding: 20, 
           font: {
             size: 14,
             weight: '500',
@@ -44,7 +43,7 @@ const CarbonChart = ({ chartData }) => {
         }
       },
       tooltip: {
-        backgroundColor: '#263238', // Fundo do tooltip
+        backgroundColor: '#263238', 
         titleColor: '#fff',
         bodyColor: '#fff',
         padding: 10,

@@ -1,15 +1,15 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import DemoDashboard from '../components/DemoDashboard';
-import '../styles/HomePage.css'; // Novo CSS
+import '../styles/HomePage.css'; 
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
     <div className="homepage">
-      <Navbar /> {/* A Navbar aparece aqui */}
+      <Navbar /> {}
       
-      {/* Seção 1: Hero (Texto Explicativo) */}
+      {}
       <header className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">
@@ -26,7 +26,7 @@ const HomePage = () => {
         </div>
       </header>
 
-      {/* Seção 2: Demonstração */}
+      {}
       <section className="demo-section">
         <h2 className="section-title">Veja como funciona</h2>
         <DemoDashboard />

@@ -24,7 +24,7 @@ const RegisterForm = () => {
       
       // Se registrar com sucesso, faz o login automaticamente
       localStorage.setItem('token', response.data.token);
-      navigate('/dashboard'); // Sucesso! Vai para o dashboard
+      navigate('/dashboard');
     } catch (err) {
       console.error('Erro no registro!', err);
       setError(err.response?.data?.msg || 'Não foi possível criar a conta.');

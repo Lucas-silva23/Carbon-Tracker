@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import api from '../services/api';
-
-// Vamos usar o mesmo estilo do AddHabitForm, mas com classes diferentes
 import '../styles/CreateHabitTypeForm.css'; 
 
 const CreateHabitTypeForm = ({ onHabitTypeCreated }) => {

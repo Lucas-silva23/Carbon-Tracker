@@ -14,7 +14,7 @@ const LoginForm = () => {
     try {
       const response = await api.post('/auth/login', { email, password });
       localStorage.setItem('token', response.data.token);
-      navigate('/dashboard'); // Sucesso! Vai para o dashboard
+      navigate('/dashboard');
     } catch (err) {
       console.error('Erro no login!', err);
       setError(err.response?.data?.msg || 'Email ou senha inválidos.');
@@ -22,7 +22,6 @@ const LoginForm = () => {
   };
 
   return (
-    // Note que removemos o <p className="auth-link">...</p>
     <form className="auth-form" onSubmit={handleSubmit}>
       <h2>Login</h2>
       {error && <p className="error-message">{error}</p>}

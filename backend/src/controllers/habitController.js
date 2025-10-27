@@ -1,8 +1,6 @@
 const db = require('../config/db');
 
-// --- FUNÇÕES NOVAS E MODIFICADAS ---
-
-// (Modificado) Busca hábitos globais (user_id IS NULL) + hábitos do usuário logado
+// Função para obter os tipos de hábitos
 exports.getHabitTypes = async (req, res) => {
   const userId = req.userId;
   try {
@@ -17,7 +15,7 @@ exports.getHabitTypes = async (req, res) => {
   }
 };
 
-// (Novo) Cria um novo tipo de hábito associado ao usuário
+// Criação de um novo tipo de hábito personalizado pelo usuário
 exports.createHabitType = async (req, res) => {
   const userId = req.userId;
   const { name, unit_name, carbon_factor_kg } = req.body;
@@ -38,7 +36,7 @@ exports.createHabitType = async (req, res) => {
   }
 };
 
-// (Novo) Busca o histórico (log) de hábitos registrados pelo usuário
+// Busca de habitos do usuário
 exports.getHabitLog = async (req, res) => {
   const userId = req.userId;
   try {
@@ -63,7 +61,7 @@ exports.getHabitLog = async (req, res) => {
   }
 };
 
-// (Novo) Deleta um registro de hábito (um item do log)
+// Deleta um hábito do usuário
 exports.deleteUserHabit = async (req, res) => {
   const userId = req.userId;
   const habitId = req.params.id; 
@@ -85,26 +83,23 @@ exports.deleteUserHabit = async (req, res) => {
   }
 };
 
-
-// --- FUNÇÕES ANTIGAS (AGORA COMPLETAS) ---
-
-// (Existente) Adiciona um novo registro de hábito
+// Adiciona um novo registro de hábito
 exports.addHabit = async (req, res) => {
   const { habit_type_id, quantity } = req.body;
-  const userId = req.userId; // Vem do middleware checkAuth
+  const userId = req.userId;
 
   try {
-    // 1. Buscar o fator de carbono do hábito mestre
+    // Buscar o fator de carbono do hábito mestre
     const habitType = await db.query('SELECT carbon_factor_kg FROM habit_types WHERE id = $1', [habit_type_id]);
     if (habitType.rows.length === 0) {
       return res.status(404).json({ msg: 'Tipo de hábito não encontrado.' });
     }
     const factor = habitType.rows[0].carbon_factor_kg;
 
-    // 2. Calcular o carbono salvo
+    // Calcular o carbono salvo
     const calculated_carbon_saved = parseFloat(quantity) * parseFloat(factor);
 
-    // 3. Salvar no banco
+    // Salvar no banco
     const newHabit = await db.query(
       'INSERT INTO user_habits (user_id, habit_type_id, quantity, calculated_carbon_saved) VALUES ($1, $2, $3, $4) RETURNING *',
       [userId, habit_type_id, quantity, calculated_carbon_saved]
@@ -117,18 +112,17 @@ exports.addHabit = async (req, res) => {
   }
 };
 
-// (Existente) Retorna os dados agregados para o dashboard
+// Retorna os dados agregados para o dashboard
 exports.getDashboardData = async (req, res) => {
   const userId = req.userId;
   try {
-    // Query 1: Total geral
     const totalResult = await db.query(
       'SELECT SUM(calculated_carbon_saved) as grand_total FROM user_habits WHERE user_id = $1',
       [userId]
     );
     const grand_total = totalResult.rows[0].grand_total || 0;
 
-    // Query 2: Dados para o gráfico (agrupados por tipo)
+    // Dados para o gráfico (agrupados por tipo)
     const chartResult = await db.query(
       `SELECT 
          ht.name, 

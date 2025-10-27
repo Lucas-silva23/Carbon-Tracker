@@ -2,7 +2,9 @@ const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// Função de registro de usuário
 exports.register = async (req, res) => {
+
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ msg: 'Por favor, insira email e senha.' });
@@ -33,7 +35,7 @@ exports.register = async (req, res) => {
   }
 };
 
-// --- FUNÇÃO DE LOGIN COMPLETA ---
+// Função de login de usuário
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -41,19 +43,19 @@ exports.login = async (req, res) => {
   }
 
   try {
-    // 1. Buscar usuário por email
+    // Buscar usuário por email
     const user = await db.query('SELECT * FROM users WHERE email = $1', [email]);
     if (user.rows.length === 0) {
       return res.status(400).json({ msg: 'Credenciais inválidas.' });
     }
 
-    // 2. Comparar a senha
+    // Comparar a senha
     const isMatch = await bcrypt.compare(password, user.rows[0].password_hash);
     if (!isMatch) {
       return res.status(400).json({ msg: 'Credenciais inválidas.' });
     }
 
-    // 3. Gerar e retornar um novo token JWT
+    // Gerar e retornar um novo token JWT
     const token = jwt.sign({ userId: user.rows[0].id }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });

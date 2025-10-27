@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (!token) {
     // Se não houver token, redireciona para a nova página
-    return <Navigate to="/auth" replace />; {/* MUDANÇA AQUI */}
+    return <Navigate to="/auth" replace />; {}
   }
 
   return children;

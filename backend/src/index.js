@@ -8,8 +8,8 @@ const habitRoutes = require('./routes/habitRoutes');
 const app = express();
 
 // Middlewares
-app.use(cors()); // Permite requisições do frontend
-app.use(express.json()); // Habilita o parsing de JSON no body
+app.use(cors()); 
+app.use(express.json()); 
 
 // Rotas
 app.use('/api/auth', authRoutes);

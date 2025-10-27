@@ -1,12 +1,11 @@
 .create-habit-type-form {
-  /* Usa o mesmo estilo de card dos outros */
   background-color: var(--card-bg);
   padding: 30px;
   border-radius: 12px;
   box-shadow: var(--shadow-medium);
   width: 100%;
   max-width: 600px;
-  margin: 0 auto; /* Centraliza o formulário */
+  margin: 0 auto; 
   height: fit-content;
 }
 
